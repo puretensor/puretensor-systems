@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nanbeige4.3-33B on one RTX PRO 6000 Max-Q · PureTensor Systems</title>
+<meta name="description" content="Nanbeige4.3-33B at 94.1 tok/s on one 325 W RTX PRO 6000 Max-Q, batch 1. One-command recipe; every number is a Verified LocalMaxxing run.">
+<meta property="og:title" content="Nanbeige4.3-33B at 94.1 tok/s on one RTX PRO 6000 Max-Q">
+<meta property="og:description" content="Stock FP8 does 42.9. NVFP4 weights and free n-gram drafts take it to 94.1, DFlash2 to 105.3 on code. One command, every number Verified.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../../">
+      <span class="wordmark"><span>Pure</span><b>Tens</b><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="9.25" stroke-width="2"/><line x1="4.9" y1="4.9" x2="17.1" y2="17.1" stroke-width="2"/><line x1="17.1" y1="4.9" x2="4.9" y2="17.1" stroke-width="2"/></svg><b>r</b></span>
+      <span class="brand-tag">SYSTEMS</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../../" aria-current="page">Recipes</a>
+      <a href="#method">Method</a>
+      <a href="{{REPO}}">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="../../">Recipes</a><span>/</span><span>Nanbeige4.3-33B · 1× RTX PRO 6000 Max-Q</span></p>
+    <p class="eyebrow">Recipe 001 · Dense 33B · One Max-Q card · 325 W</p>
+    <h1><span class="hot">94 tokens a second</span> from a dense 33B, <span class="dim">on one 325-watt card.</span></h1>
+    <p class="lede">Nanbeige4.3-33B reads all of its weights for every token it writes, so one card is limited by memory bandwidth. <strong>Smaller weights and free drafts take it from 42.9 to 94.1 tok/s on code and 92.6 on reasoning</strong>, one request at a time. Every number here is a Verified run on LocalMaxxing, and one command starts the same server.</p>
+    <div class="chips">
+      <span class="chip ok">16 Verified runs</span>
+      <span class="chip">NVFP4 weights</span>
+      <span class="chip">n-gram drafts</span>
+      <span class="chip">DFlash2 drafter</span>
+      <span class="chip">vLLM · SGLang</span>
+      <span class="chip">Pinned images</span>
+      <span class="chip">MIT recipe</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="{{REPO}}">Get the recipe on GitHub ↗</a>
+      <a class="btn" href="#receipts">Check the runs</a>
+    </div>
+
+    <div class="race" id="race" aria-label="The same reply replayed at three measured speeds">
+      <div class="lane" data-rate="42.91" data-ttft="49.5">
+        <div class="lane-head"><span class="lane-name">Stock FP8 · vLLM</span><span class="lane-rate num">42.9<small>tok/s</small></span></div>
+        <pre class="lane-out"><span></span></pre>
+        <div class="lane-bar"><i></i></div>
+        <div class="lane-foot"><span class="tok">0 / 1,024</span><span class="t">0.0 s</span></div>
+      </div>
+      <div class="lane lead" data-rate="94.10" data-ttft="36.4">
+        <div class="lane-head"><span class="lane-name">This recipe · ./start.sh</span><span class="lane-rate num">94.1<small>tok/s</small></span></div>
+        <pre class="lane-out"><span></span></pre>
+        <div class="lane-bar"><i></i></div>
+        <div class="lane-foot"><span class="tok">0 / 1,024</span><span class="t">0.0 s</span></div>
+      </div>
+      <div class="lane" data-rate="105.31" data-ttft="48.1">
+        <div class="lane-head"><span class="lane-name">DFlash2 · ./start.sh code</span><span class="lane-rate num">105.3<small>tok/s</small></span></div>
+        <pre class="lane-out"><span></span></pre>
+        <div class="lane-bar"><i></i></div>
+        <div class="lane-foot"><span class="tok">0 / 1,024</span><span class="t">0.0 s</span></div>
+      </div>
+    </div>
+    <div class="race-meta">
+      <span>The model's real 1,024-token reply to LocalMaxxing's code prompt, replayed at each setup's measured decode speed, {{CHARS}} characters in all.</span>
+      <button class="replay-btn" id="replay" type="button">Replay</button>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><span class="k">Code</span><span class="v hot">94.1<small>tok/s</small></span><span class="s">NVFP4 + n-gram · <a href="https://www.localmaxxing.com/runs/cmvyw8r1y099eoa01xq99kr01">run</a></span></div>
+      <div class="stat"><span class="k">Reasoning</span><span class="v">92.6<small>tok/s</small></span><span class="s">Same server · <a href="https://www.localmaxxing.com/runs/cmvyw8rcg099hoa01t3x4khyy">run</a></span></div>
+      <div class="stat"><span class="k">Code, DFlash2</span><span class="v">105.3<small>tok/s</small></span><span class="s">NVFP4 + SGLang · <a href="https://www.localmaxxing.com/runs/cmvyw8kkx098woa01l92z4h01">run</a></span></div>
+      <div class="stat"><span class="k">First token</span><span class="v">36<small>ms</small></span><span class="s">265-token prompt, default profile</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why it is fast</p>
+      <h2>The card is reading weights, so make it read less.</h2>
+      <p>A dense model touches every weight for every token. The time to stream them out of memory sets a ceiling on decode speed, and drafts are the only way past it.</p>
+    </div>
+    <div class="ceiling">
+      <svg id="ceiling" viewBox="0 0 760 236" role="img" aria-label="Measured decode speed against the weight-read ceiling for four setups"></svg>
+      <div class="legend">
+        <span><i class="sw" style="background: var(--accent)"></i>Measured, code-v1</span>
+        <span><i class="sw line"></i>Ceiling: one token per full weight read at 1.79 TB/s</span>
+      </div>
+    </div>
+    <div class="cols" style="margin-top: 40px">
+      <div>
+        <h3>Stock FP8 reaches 79% of its ceiling</h3>
+        <p>The FP8 checkpoint is 35.5 GB. Leave out the 2.4 GB embedding table, of which each token reads one row, and <strong>33.1 GB moves per token</strong>. At 1.79 TB/s that allows about 54 tok/s. Stock vLLM measures 42.9.</p>
+      </div>
+      <div>
+        <h3>NVFP4 lifts the ceiling to about 91</h3>
+        <p>primitive-ai's NVFP4 checkpoint stores the weights in 4 bits, so <strong>19.7 GB moves per token</strong>. vLLM measures 67.7 with no drafts. The same checkpoint on SGLang 0.5.21 measures 49.5; we have not profiled why.</p>
+      </div>
+      <div>
+        <h3>Drafts get more than one token per read</h3>
+        <p>vLLM looks up the last few tokens in the prompt and the text so far, proposes 3 that might follow, and checks them all in one pass over the weights. A pass costs about what a plain step does, so every accepted draft is close to free.</p>
+      </div>
+      <div>
+        <h3>DFlash2 is strongest on code</h3>
+        <p>ProCreations' DFlash2 is a 0.98B, 3-layer drafter that proposes a whole block of tokens from the model's own hidden states. Code is predictable: 49.5 to <strong>105.3</strong>. Reasoning text is less so: 49.8 to 71.5. That is why the default profile uses n-gram drafts.</p>
+      </div>
+    </div>
+    <div class="formula" style="margin-top: 40px" aria-label="1.35 tokens per step divided by 14.3 milliseconds per step is 94 tokens per second">
+      <span class="big num">1.35</span><span class="u">tokens / step</span>
+      <span class="op">÷</span>
+      <span class="big num">14.3</span><span class="u">ms / step</span>
+      <span class="op">=</span>
+      <span class="big num hot">94</span><span class="u">tok/s · 1,024 tokens in 760 steps</span>
+    </div>
+    <p class="small" style="margin-top: 12px; max-width: 70ch">Why not Nanbeige4.2-3B as the drafter? Its vocabulary is the same, but its embedding table is padded to 166,144 rows against the 33B's 166,912, so vLLM refuses the pair, and its architecture would run on the slow Transformers fallback.</p>
+  </div>
+</section>
+
+<section id="profiles">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Eight setups, one card</p>
+      <h2>Pick a profile by what you serve.</h2>
+      <p><code>./start.sh</code> serves the default. Gains are confirmed against the same engine's stock run over interleaved fresh boots, with a 95% confidence interval.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Setup</th><th>Start with</th><th class="n">Code tok/s</th><th class="n">Reasoning tok/s</th><th class="n">Confirmed gain</th></tr></thead>
+        <tbody>
+{{ROWS}}
+        </tbody>
+      </table>
+    </div>
+    <p class="small swipe">Swipe the table for more →</p>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Run it</p>
+      <h2>One command downloads, starts and checks it.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-n">1</span><div>
+        <h3>Clone and start</h3>
+        <div class="codeblock"><pre><code>git clone {{REPO}}
+cd Nanbeige4.3-33B-1x-RTX-PRO-6000-MaxQ
+./start.sh fast --print   <span class="c"># show the exact docker command, start nothing</span>
+./start.sh                <span class="c"># 21 GB of NVFP4 weights, then vLLM, then a smoke test</span></code></pre><button class="copy" type="button">Copy</button></div>
+        <p>The first start compiles kernels and CUDA graphs, which takes a few minutes. It ends by printing the server's address.</p>
+      </div></div>
+      <div class="step"><span class="step-n">2</span><div>
+        <h3>Talk to it</h3>
+        <div class="codeblock"><pre><code>curl -s http://127.0.0.1:8000/v1/chat/completions -H 'Content-Type: application/json' -d '{
+  "model": "nanbeige43-33b",
+  "messages": [{"role": "user", "content": "Write a Python function that merges two sorted lists."}],
+  "max_tokens": 1024,
+  "chat_template_kwargs": {"enable_thinking": false}
+}'</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>Any OpenAI client works with <code>base_url = "http://127.0.0.1:8000/v1"</code>. Set <code>GPU</code>, <code>PORT</code> or <code>MODELS_DIR</code> to change the card, the port or where weights go.</p>
+      </div></div>
+      <div class="step"><span class="step-n">3</span><div>
+        <h3>Measure your card</h3>
+        <div class="codeblock"><pre><code>python3 bench.py   <span class="c"># LocalMaxxing's prompts, temperature 0, median of 5</span></code></pre><button class="copy" type="button">Copy</button></div>
+        <p>It prints decode speed, time to first token and, on vLLM, tokens per step and milliseconds per step, so you can see which of the two differs from ours.</p>
+      </div></div>
+    </div>
+    <div class="needs" style="margin-top: 40px">
+      <div><h3>One RTX PRO 6000</h3><p>96 GB, with about 88 GB free. These numbers are for the 325 W Max-Q.</p></div>
+      <div><h3>Linux and Docker</h3><p>With the NVIDIA Container Toolkit. Tested on driver 615.71.10.</p></div>
+      <div><h3>Disk</h3><p>21 GB for NVFP4, 34 GB for FP8, 1.9 GB for the DFlash2 drafter.</p></div>
+      <div><h3>The hf CLI</h3><p><code>pip install -U huggingface_hub</code>. Weights download at pinned commits.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="receipts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Receipts</p>
+      <h2>Sixteen runs, all Verified, all linked.</h2>
+      <p>Each LocalMaxxing run page holds the prompt, the model's output, the engine's own timings and the exact launch command.</p>
+    </div>
+    <div class="ledger-scroll"><div class="ledger">
+      <div class="ledger-row head"><span>Setup</span><span>LocalMaxxing run</span><span class="r">tok/s</span><span class="r">TTFT</span><span>Hashes</span></div>
+{{LEDGER}}
+    </div></div>
+    <div class="cols" id="method" style="margin-top: 40px">
+      <div>
+        <h3>How each number was measured</h3>
+        <p>LocalMaxxing's canonical code-v1 and reasoning-v1 prompts, one request at a time, temperature 0, thinking off, 1,024 output tokens, 2 warmups discarded and the median of 5 kept. Decode is (output tokens − 1) divided by the time from the first token to the last.</p>
+      </div>
+      <div>
+        <h3>How each setup was chosen</h3>
+        <p>Our tuning harness changes one setting at a time, gates every candidate on output quality and degeneration, and keeps a change only if interleaved fresh boots (stock, tuned, stock, tuned, stock, tuned) confirm a gain of at least 1%. The CPU ran in a performance window, which does not change decode.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <p class="eyebrow">Credits</p>
+        <p><a href="https://huggingface.co/Nanbeige">Nanbeige</a> for the model and its FP8 checkpoint, <a href="https://huggingface.co/primitive-ai/Nanbeige4.3-33B-NVFP4">primitive-ai</a> for NVFP4, <a href="https://huggingface.co/ProCreations/Nanbeige4.3-33B-DFlash2">ProCreations</a> for DFlash2, <a href="https://github.com/vllm-project/vllm">vLLM</a>, <a href="https://github.com/sgl-project/sglang">SGLang</a>, and <a href="https://www.localmaxxing.com">LocalMaxxing</a> for the prompts and verification.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Licenses</p>
+        <p>The recipe's scripts are MIT. The weights are Apache-2.0 and download from Hugging Face; nothing is redistributed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>PureTensor Systems · recipes measured on our own cards · <a href="https://puretensor.ai">puretensor.ai</a></span>
+    <span>Results on X: <a href="https://x.com/Dataphil3">@Dataphil3</a> · Recipe 001, 2 Nov 2026</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const TEXT = {{SAMPLE}};
+  const TOKENS = 1024, CPT = TEXT.length / TOKENS;  // characters per token in this reply
+  const lanes = [...document.querySelectorAll('#race .lane')].map(el => ({
+    el, rate: +el.dataset.rate, ttft: +el.dataset.ttft / 1000,
+    out: el.querySelector('.lane-out span'), bar: el.querySelector('.lane-bar i'),
+    tok: el.querySelector('.tok'), t: el.querySelector('.t'),
+  }));
+  const fmt = n => n.toLocaleString('en-US');
+  function paint(lane, elapsed) {
+    const decoding = Math.max(0, elapsed - lane.ttft);
+    const n = elapsed < lane.ttft ? 0 : Math.min(TOKENS, 1 + Math.floor(decoding * lane.rate));
+    const total = lane.ttft + (TOKENS - 1) / lane.rate;
+    lane.out.textContent = TEXT.slice(0, Math.round(n * CPT)).slice(-1400);
+    lane.bar.style.width = (n / TOKENS * 100).toFixed(2) + '%';
+    lane.tok.textContent = fmt(n) + ' / 1,024';
+    const done = n >= TOKENS;
+    lane.t.textContent = done ? 'done in ' + total.toFixed(1) + ' s' : Math.min(elapsed, total).toFixed(1) + ' s';
+    lane.t.classList.toggle('done', done);
+    return done;
+  }
+  let raf = 0;
+  function run() {
+    cancelAnimationFrame(raf);
+    const t0 = performance.now();
+    const tick = now => {
+      const elapsed = (now - t0) / 1000;
+      const allDone = lanes.map(l => paint(l, elapsed)).every(Boolean);
+      if (!allDone) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+  }
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still) lanes.forEach(l => paint(l, 1e9)); else run();
+  document.getElementById('replay').addEventListener('click', run);
+
+  // Ceiling chart: one scale for bars, ceilings, ticks and labels.
+  const data = [
+    { label: 'FP8, stock', sub: 'vLLM', ceil: 54.1, v: 42.9 },
+    { label: 'NVFP4, stock', sub: 'vLLM', ceil: 90.9, v: 67.7 },
+    { label: 'NVFP4 + n-gram', sub: 'vLLM · default', ceil: 90.9, v: 94.1, hot: true },
+    { label: 'NVFP4 + DFlash2', sub: 'SGLang · code', ceil: 90.9, v: 105.3 },
+  ];
+  const svg = document.getElementById('ceiling'), NS = 'http://www.w3.org/2000/svg';
+  const X0 = 170, X1 = 600, MAX = 120, ROW = 46, TOP = 14;
+  const x = val => X0 + (val / MAX) * (X1 - X0);
+  const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; svg.appendChild(e); return e; };
+  const axisY = TOP + data.length * ROW + 6;
+  for (let t = 0; t <= MAX; t += 20) {
+    el('line', { x1: x(t), x2: x(t), y1: TOP - 4, y2: axisY, style: 'stroke: var(--line)', 'stroke-width': 1 });
+    el('text', { x: x(t), y: axisY + 18, 'text-anchor': 'middle', 'font-size': 11, style: 'fill: var(--faint)' }, t);
+  }
+  el('text', { x: X1, y: axisY + 36, 'text-anchor': 'end', 'font-size': 11, style: 'fill: var(--faint)' }, 'tok/s, batch 1');
+  data.forEach((d, i) => {
+    const y = TOP + i * ROW;
+    el('text', { x: 0, y: y + 15, 'font-size': 12, style: 'fill: var(--fg)' }, d.label);
+    el('text', { x: 0, y: y + 31, 'font-size': 10.5, style: 'fill: var(--faint)' }, d.sub);
+    el('rect', { x: X0, y: y + 6, width: x(d.v) - X0, height: 22, rx: 2, style: d.hot ? 'fill: var(--accent)' : 'fill: var(--accent); opacity: 0.55' });
+    el('line', { x1: x(d.ceil), x2: x(d.ceil), y1: y + 1, y2: y + 33, style: 'stroke: var(--amber)', 'stroke-width': 2, 'stroke-dasharray': '4 3' });
+    const past = d.v > d.ceil;
+    el('text', { x: Math.max(x(d.v), x(d.ceil)) + 10, y: y + 22, 'font-size': 12.5, style: 'fill: var(--fg); font-weight: 500' }, d.v.toFixed(1) + (past ? '  past the ceiling' : '  · ' + Math.round(d.v / d.ceil * 100) + '% of ' + Math.round(d.ceil)));
+  });
+
+  // Copy buttons: clipboard inside the click, select the text if that is refused.
+  document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', () => {
+    const code = btn.parentElement.querySelector('code');
+    const text = code.innerText;
+    const ok = () => { btn.textContent = 'Copied'; setTimeout(() => (btn.textContent = 'Copy'), 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Press ⌘C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+  }));
+})();
+</script>
+</body>
+</html>
