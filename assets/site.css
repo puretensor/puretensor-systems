@@ -272,3 +272,5 @@ tr.best td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
 section.tight { padding-block: 40px; }
 .ceiling { overflow-x: auto; }
 .ceiling svg { min-width: 620px; }
+.cols.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+@media (max-width: 960px) { .cols.cols-3 { grid-template-columns: minmax(0, 1fr); } }
