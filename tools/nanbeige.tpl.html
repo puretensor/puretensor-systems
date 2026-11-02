@@ -209,7 +209,11 @@ cd Nanbeige4.3-33B-1x-RTX-PRO-6000-MaxQ
       </div>
       <div>
         <h3>How each setup was chosen</h3>
-        <p>Our tuning harness changes one setting at a time, gates every candidate on output quality and degeneration, and keeps a change only if interleaved fresh boots (stock, tuned, stock, tuned, stock, tuned) confirm a gain of at least 1%. The CPU ran in a performance window, which does not change decode.</p>
+        <p>Our tuning harness changes one setting at a time, gates every candidate on output quality and degeneration, and keeps a change only if interleaved fresh boots (stock, tuned, stock, tuned, stock, tuned) confirm a gain of at least 1%. The CPU ran in a performance window.</p>
+      </div>
+      <div>
+        <h3>Reproduced from a fresh clone</h3>
+        <p>On 2 November we cloned the recipe, let it download its own weights and ran <code>bench.py</code> on the same card with CPU boost off. The default profile measured <strong>95.2 and 92.8 tok/s</strong>, at 1.36 tokens per step and 14.3 ms per step, within 1.2% of the Verified runs. The DFlash2 profile measured 99.5 and 69.0, a few percent lower: SGLang does more work on the CPU between steps, so it misses the boost that vLLM's CUDA graphs do not need.</p>
       </div>
     </div>
   </div>
