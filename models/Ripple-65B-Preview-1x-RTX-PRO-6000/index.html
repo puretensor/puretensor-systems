@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ripple-65B Preview on one RTX PRO 6000 · PureTensor Systems</title>
+<meta name="description" content="Ripple-65B Preview at 135.2 tok/s on code and 97.9 on reasoning on one RTX PRO 6000, batch 1. One-command recipe; every number links to a LocalMaxxing run.">
+<meta property="og:title" content="Ripple-65B Preview at 135.2 tok/s on one RTX PRO 6000">
+<meta property="og:description" content="A dense 65B, Ricursive's NVFP4 weights and DFlash2 drafter on SGLang. 24.0 tok/s without the drafter, 135.2 with it. One command, every number linked.">
+<meta property="og:type" content="article">
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
+<link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-192.png?v=2" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#09090b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../../">
+      <span class="wordmark"><span>Pure</span><b>Tens</b><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="9.25" stroke-width="2"/><line x1="4.9" y1="4.9" x2="17.1" y2="17.1" stroke-width="2"/><line x1="17.1" y1="4.9" x2="4.9" y2="17.1" stroke-width="2"/></svg><b>r</b></span>
+      <span class="brand-tag">SYSTEMS</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="../../" aria-current="page">Recipes</a>
+      <a href="#method">Method</a>
+      <a href="https://github.com/puretensor/Ripple-65B-Preview-1x-RTX-PRO-6000">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="../../">Recipes</a><span>/</span><span>Ripple-65B Preview · 1× RTX PRO 6000</span></p>
+    <p class="eyebrow">Recipe 002 · Dense 65B · One card · 600 W</p>
+    <h1><span class="hot">135 tokens a second</span> from a dense 65B, <span class="dim">on one card.</span></h1>
+    <p class="lede">Ripple-65B Preview reads all of its weights for every pass, so on its own one card writes 24 tokens a second. <strong>Ricursive's DFlash2 drafter turns each pass into several tokens: 135.2 tok/s on code and 97.9 on reasoning</strong>, one request at a time, with Ricursive's own NVFP4 weights and flags. One command starts the same server.</p>
+    <div class="chips">
+      <span class="chip ok">4 Verified runs</span>
+      <span class="chip">NVFP4 weights</span>
+      <span class="chip">DFlash2 drafter</span>
+      <span class="chip">SGLang 0.5.19</span>
+      <span class="chip">Pinned wheels</span>
+      <span class="chip">MIT recipe</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/puretensor/Ripple-65B-Preview-1x-RTX-PRO-6000">Get the recipe on GitHub ↗</a>
+      <a class="btn" href="#receipts">Check the runs</a>
+    </div>
+
+    <div class="race" id="race" style="grid-template-columns: repeat(2, minmax(0, 1fr))" aria-label="The same reply replayed at two measured speeds">
+      <div class="lane" data-rate="23.99" data-ttft="104.7">
+        <div class="lane-head"><span class="lane-name">No drafter · ./start.sh nospec</span><span class="lane-rate num">24.0<small>tok/s</small></span></div>
+        <pre class="lane-out"><span></span></pre>
+        <div class="lane-bar"><i></i></div>
+        <div class="lane-foot"><span class="tok">0 / 928</span><span class="t">0.0 s</span></div>
+      </div>
+      <div class="lane lead" data-rate="135.21" data-ttft="115.1">
+        <div class="lane-head"><span class="lane-name">This recipe · ./start.sh</span><span class="lane-rate num">135.2<small>tok/s</small></span></div>
+        <pre class="lane-out"><span></span></pre>
+        <div class="lane-bar"><i></i></div>
+        <div class="lane-foot"><span class="tok">0 / 928</span><span class="t">0.0 s</span></div>
+      </div>
+    </div>
+    <div class="race-meta">
+      <span>The model's real 928-token reply to LocalMaxxing's code prompt, replayed at each setup's measured decode speed, 3,981 characters in all.</span>
+      <button class="replay-btn" id="replay" type="button">Replay</button>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><span class="k">Code</span><span class="v hot">135.2<small>tok/s</small></span><span class="s">NVFP4 + DFlash2 · <a href="https://www.localmaxxing.com/runs/cmw2sfbvd0bcdoa01shm40fuh">run</a></span></div>
+      <div class="stat"><span class="k">Reasoning</span><span class="v">97.9<small>tok/s</small></span><span class="s">Same server · <a href="https://www.localmaxxing.com/runs/cmw2sfbi20bcaoa01hqj3newo">run</a></span></div>
+      <div class="stat"><span class="k">1,000-line script</span><span class="v">130.8<small>tok/s</small></span><span class="s">16,384 tokens · <a href="https://www.localmaxxing.com/runs/cmw2xzwmh0bghoa017hrwhnx9">run</a></span></div>
+      <div class="stat"><span class="k">Essay and poem</span><span class="v">75.9<small>tok/s</small></span><span class="s">2,168 tokens · <a href="https://www.localmaxxing.com/runs/cmw2xzw1n0bgeoa01atqkp6l2">run</a></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="quality">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Is it any good</p>
+      <h2>Early signs say yes. <span class="dim">Not a thorough test.</span></h2>
+      <p>A short check on 4 November, on the BF16 weights, paired item by item with DeepSeek-V4.1-Flash on the same harness.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>19/20 on our private coding set</h3>
+        <p>Twenty real defects from our own code, each fixed with a regression test. <strong>DeepSeek-V4.1-Flash also scored 19/20</strong>; each missed a different task.</p>
+      </div>
+      <div>
+        <h3>30/40 on a reasoning mix</h3>
+        <p>AIME 2026 7/8, HMMT February 2026 5/8, GPQA-Diamond 18/24, against DeepSeek-V4.1-Flash's 32/40: within noise (McNemar p = 0.63). 9 of the 10 misses ran out of a 16K-token budget; on the items it finished it was 30/31.</p>
+      </div>
+    </div>
+    <p class="small" style="margin-top: 12px; max-width: 70ch">Tools (auto, required, parallel, a full round trip), JSON-schema output and a 30K-token needle all worked. A small sample on one harness: treat it as worth your time, not as a ranking.</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why it is fast</p>
+      <h2>One pass over the weights, several tokens out.</h2>
+      <p>A dense model touches every weight on every pass. The time to stream them out of memory caps decode at one token per pass, and a drafter is the way past it.</p>
+    </div>
+    <div class="ceiling">
+      <svg id="ceiling" viewBox="0 0 760 282" role="img" aria-label="Measured decode speed against the one-token-per-pass ceiling for five workloads"></svg>
+      <div class="legend">
+        <span><i class="sw" style="background: var(--accent)"></i>Measured, batch 1</span>
+        <span><i class="sw line"></i>Ceiling: one token per 57 GB weight read at 1.79 TB/s</span>
+      </div>
+    </div>
+    <div class="cols" style="margin-top: 40px">
+      <div>
+        <h3>Without drafts, 76% of the ceiling</h3>
+        <p>Ricursive's NVFP4 export stores the MLPs in 4 bits (28 GB) and keeps attention in BF16 (27 GB). With the 2 GB output head, <strong>about 57 GB moves per pass</strong>. At 1.79 TB/s that allows about 31 tok/s. Measured: 41.7 ms per token, 24.0 tok/s.</p>
+      </div>
+      <div>
+        <h3>DFlash2 checks 16 tokens per pass</h3>
+        <p>Ricursive's 4.04B, 5-layer drafter drafts a whole 16-token block at once from the model's own hidden states, and one pass of the 65B checks it. A step reads about 65 GB and takes 51.6 ms. The model keeps only tokens it would have picked itself.</p>
+      </div>
+      <div>
+        <h3>Predictable text lands more per step</h3>
+        <p>Code-v1 lands 6.9 tokens per step, reasoning-v1 5.1, the 1,000-line script 6.9 and the essay 3.9. Step time barely moves, so tokens per step sets the speed.</p>
+      </div>
+      <div>
+        <h3>The flags were already right</h3>
+        <p>A profile of 30 steps: BF16 matrix multiplies 50% of GPU time, FP4 MLP multiplies 38%, both at about 1.46 TB/s, 82% of peak. Nothing in our sweep beat Ricursive's DGX Spark flags; the next gain needs fewer bytes, a quantization project.</p>
+      </div>
+    </div>
+    <div class="formula" style="margin-top: 40px" aria-label="6.9 tokens per step divided by 51.6 milliseconds per step is 134 tokens per second">
+      <span class="big num">6.9</span><span class="u">tokens / step</span>
+      <span class="op">÷</span>
+      <span class="big num">51.6</span><span class="u">ms / step</span>
+      <span class="op">=</span>
+      <span class="big num hot">134</span><span class="u">tok/s · code-v1, measured 135.2</span>
+    </div>
+    <p class="small" style="margin-top: 12px; max-width: 70ch">In our coding agent, with about 18K tokens of system prompt and tools before every request, we saw a steady 50-70 tok/s on prose and 110-120 on long code after warmup. That is below the bare-API numbers above: the long context makes each step slower, and the agent samples with its own settings rather than at temperature 0.</p>
+  </div>
+</section>
+
+<section id="profiles">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What we tried</p>
+      <h2>The vendor's flags, against every alternative that ran.</h2>
+      <p>Screening runs, 3 after 1 warmup, so read them against each other. Milliseconds per step is the fair comparison, because tokens per step moves run to run.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Change from the vendor flags</th><th class="n">Code tok/s</th><th class="n">Reasoning tok/s</th><th class="n">ms / step</th><th>Result</th></tr></thead>
+        <tbody>
+<tr class="best"><td><strong>None</strong><br><span class="small"><code>./start.sh</code></span></td><td class="n">135.6</td><td class="n">99.7</td><td class="n">51.6</td><td>kept</td></tr>
+<tr><td><strong>32-token draft blocks</strong></td><td class="n">130.0</td><td class="n">101.9</td><td class="n">53</td><td>the checkpoint drafts 16-token blocks</td></tr>
+<tr><td><strong>Marlin FP4 GEMM</strong></td><td class="n">133.1</td><td class="n">102.0</td><td class="n">51.6</td><td>equal, slower prefill</td></tr>
+<tr><td><strong>cuDNN FP4 GEMM</strong></td><td class="n">124.2</td><td class="n">93.6</td><td class="n">55</td><td>slower</td></tr>
+<tr><td><strong>Triton attention</strong></td><td class="n">112.8</td><td class="n">91.1</td><td class="n">55</td><td>slower</td></tr>
+<tr><td><strong>Online FP8 attention</strong><br><span class="small">q, k, v, o projections</span></td><td class="n">116.7</td><td class="n">95.6</td><td class="n">53</td><td>fewer bytes, but 6.2 tokens per step instead of 7.0</td></tr>
+<tr><td><strong>Decode-mode verify attention</strong></td><td class="n">133.0</td><td class="n">100.0</td><td class="n">51.2</td><td>equal</td></tr>
+<tr><td><strong>No drafter</strong><br><span class="small"><code>./start.sh nospec</code></span></td><td class="n"><a href="https://www.localmaxxing.com/runs/cmw2s16bu0bc7oa01jms6k4uk">24.0</a></td><td class="n"><a href="https://www.localmaxxing.com/runs/cmw2s15m70bc4oa01fzbv9hen">24.0</a></td><td class="n">41.7 per token</td><td>the reference</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small swipe">Swipe the table for more →</p>
+    <p class="small" style="margin-top: 12px; max-width: 70ch">Did not run: cuteDSL FP4 (no SM120 support), torch.compile (CUDA-graph capture fails) and an FP8 drafter (Ricursive's loader requires BF16).</p>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Run it</p>
+      <h2>One command builds, downloads, starts and checks it.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-n">1</span><div>
+        <h3>Clone and start</h3>
+        <div class="codeblock"><pre><code>git clone https://github.com/puretensor/Ripple-65B-Preview-1x-RTX-PRO-6000
+cd Ripple-65B-Preview-1x-RTX-PRO-6000
+./start.sh dflash --print   <span class="c"># show the exact server command, start nothing</span>
+./start.sh                  <span class="c"># Python env, 62 GB of weights, SGLang, then a smoke test</span></code></pre><button class="copy" type="button">Copy</button></div>
+        <p>The first start compiles kernels and captures CUDA graphs, which takes a few minutes. It ends by printing the server's address.</p>
+      </div></div>
+      <div class="step"><span class="step-n">2</span><div>
+        <h3>Talk to it</h3>
+        <div class="codeblock"><pre><code>curl -s http://127.0.0.1:8000/v1/chat/completions -H 'Content-Type: application/json' -d '{
+  "model": "ripple",
+  "messages": [{"role": "user", "content": "Write a Python function that merges two sorted lists."}],
+  "max_tokens": 4096
+}'</code></pre><button class="copy" type="button">Copy</button></div>
+        <p>Any OpenAI client works with <code>base_url = "http://127.0.0.1:8000/v1"</code>; tool calls and <code>reasoning_content</code> come back parsed. Set <code>GPU</code>, <code>PORT</code>, <code>CONTEXT</code> or <code>MODELS_DIR</code> to change the card, the port, the context or where weights go.</p>
+      </div></div>
+      <div class="step"><span class="step-n">3</span><div>
+        <h3>Measure your card</h3>
+        <div class="codeblock"><pre><code>python3 bench.py   <span class="c"># LocalMaxxing's prompts plus ours, temperature 0, median of 5</span></code></pre><button class="copy" type="button">Copy</button></div>
+        <p>It prints decode speed, time to first token, tokens per step and milliseconds per step, so you can see which of the two differs from ours.</p>
+      </div></div>
+    </div>
+    <div class="needs" style="margin-top: 40px">
+      <div><h3>One RTX PRO 6000</h3><p>96 GB, with about 85 GB free. Measured on the 600 W Workstation Edition; the Max-Q is not measured.</p></div>
+      <div><h3>CUDA 13 and uv</h3><p>A CUDA 13 toolkit with nvcc (we used 13.2) for SGLang's kernels, and uv for the pinned environment. Tested on driver 615.71.09.</p></div>
+      <div><h3>Disk</h3><p>54 GB for the NVFP4 weights, 7.6 GB for the drafter, about 10 GB for the Python environment.</p></div>
+      <div><h3>Pinned</h3><p>Weights by commit, every Python package by version, Ricursive's model plugin by sha256.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="receipts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Receipts</p>
+      <h2>Eight runs, all linked.</h2>
+      <p>Each LocalMaxxing run page holds the prompt, the model's output, the engine's own timings and the exact launch command. Runs on LocalMaxxing's canonical prompts are Verified; the others are marked unverified only because their prompts are not canonical.</p>
+    </div>
+    <div class="ledger-scroll"><div class="ledger">
+      <div class="ledger-row head"><span>Setup</span><span>LocalMaxxing run</span><span class="r">tok/s</span><span class="r">TTFT</span><span>Hashes</span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>code-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2sfbvd0bcdoa01shm40fuh">cmw2sfbvd0bcdoa01shm40fuh</a><span class="r">135.21</span><span class="r">115 ms</span>
+<span>prompt a737db73 · out 19631d04 · <span class="ok">Verified</span></span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>reasoning-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2sfbi20bcaoa01hqj3newo">cmw2sfbi20bcaoa01hqj3newo</a><span class="r">97.89</span><span class="r">177 ms</span>
+<span>prompt 9000edaa · out 02a6e095 · <span class="ok">Verified</span></span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>our prompt: 1,000-line script</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2xzwmh0bghoa017hrwhnx9">cmw2xzwmh0bghoa017hrwhnx9</a><span class="r">130.81</span><span class="r">170 ms</span>
+<span>prompt a3c5524f · out 1b600490 · not canonical</span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>our prompt: essay and poem</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2xzw1n0bgeoa01atqkp6l2">cmw2xzw1n0bgeoa01atqkp6l2</a><span class="r">75.93</span><span class="r">168 ms</span>
+<span>prompt fa66a760 · out 077dea09 · not canonical</span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>2,644-token prompt</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2sfc5l0bcgoa01poovjnf5">cmw2sfc5l0bcgoa01poovjnf5</a><span class="r">96.76</span><span class="r">769 ms</span>
+<span>prompt 5a6b7bc1 · out f02c7965 · not canonical</span></div>
+<div class="ledger-row"><span class="what">NVFP4 + DFlash2<small>15,699-token prompt</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2sfcs00bcjoa01ciqggo8d">cmw2sfcs00bcjoa01ciqggo8d</a><span class="r">98.48</span><span class="r">4,460 ms</span>
+<span>prompt 47de0e3b · out f84fe387 · not canonical</span></div>
+<div class="ledger-row"><span class="what">NVFP4, no drafter<small>code-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2s16bu0bc7oa01jms6k4uk">cmw2s16bu0bc7oa01jms6k4uk</a><span class="r">23.99</span><span class="r">105 ms</span>
+<span>prompt a737db73 · out 14fd0c17 · <span class="ok">Verified</span></span></div>
+<div class="ledger-row"><span class="what">NVFP4, no drafter<small>reasoning-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw2s15m70bc4oa01fzbv9hen">cmw2s15m70bc4oa01fzbv9hen</a><span class="r">23.96</span><span class="r">240 ms</span>
+<span>prompt 9000edaa · out 757d62e6 · <span class="ok">Verified</span></span></div>
+    </div></div>
+    <div class="cols cols-3" id="method" style="margin-top: 40px">
+      <div>
+        <h3>How each number was measured</h3>
+        <p>One request at a time, temperature 0, 2 warmups discarded and the median of 5 kept, each prompt behind LocalMaxxing's cache-bust nonce. Ripple reasons when it needs to and has no switch, so reasoning tokens count as output. Decode is (output tokens − 1) divided by the time from the first token to the last; tokens per step come from SGLang's per-request counts.</p>
+      </div>
+      <div>
+        <h3>How the setup was chosen</h3>
+        <p>One change at a time against Ricursive's flags, compared on milliseconds per step, plus a profiler capture. Nothing beat the vendor flags, so there was no gain to confirm with fresh-boot A/B runs. The canonical runs had the CPU in a performance window; the essay and script runs did not.</p>
+      </div>
+      <div>
+        <h3>Reproduced from a fresh clone</h3>
+        <p>On 5 November we cloned the recipe on the same card, with the CPU in its normal state and the default 64K context. <code>start.sh</code> built the environment from the lock file, reused the pinned weights already on disk and was serving in 354 s. <code>bench.py</code> then measured <strong>131.9 tok/s on code and 101.6 on reasoning</strong>, at 51.1 and 51.6 ms per step: the Verified runs' step time, with tokens per step moving as the output does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <p class="eyebrow">Credits</p>
+        <p><a href="https://www.ricursive.com/ripple">Ricursive Intelligence</a> for Ripple-65B Preview, the <a href="https://huggingface.co/ricursiveAI/Ripple-65B-Preview-NVFP4">NVFP4 export</a>, the <a href="https://huggingface.co/ricursiveAI/Ripple-65B-Preview-DFlash2">DFlash2 drafter</a> and the SGLang plugin and Spark launcher this server is built from; <a href="https://github.com/sgl-project/sglang">SGLang</a>, <a href="https://github.com/flashinfer-ai/flashinfer">FlashInfer</a>, and <a href="https://www.localmaxxing.com">LocalMaxxing</a> for the prompts and verification.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Licenses</p>
+        <p>The recipe's scripts are MIT. The weights and Ricursive's plugin are Apache-2.0 and download from Hugging Face; nothing is redistributed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>PureTensor Systems · recipes measured on our own cards · <a href="https://puretensor.ai">puretensor.ai</a></span>
+    <span>Results on X: <a href="https://x.com/Dataphil3">@Dataphil3</a> · Recipe 002, 5 Nov 2026</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const TEXT = "```python\n#!/usr/bin/env python3\n\"\"\"logtally: tally log records from stdin by service and level.\"\"\"\n\nimport argparse\nimport json\nimport sys\nfrom collections import defaultdict\nfrom datetime import datetime, timezone\n\n\nLEVELS = (\"DEBUG\", \"INFO\", \"WARN\", \"ERROR\")\n\n\ndef parse_ts(value):\n    \"\"\"Parse an ISO-8601 timestamp into an aware datetime.\"\"\"\n    if not isinstance(value, str):\n        raise ValueError(\"ts must be a string\")\n    text = value.strip()\n    if text.endswith(\"Z\"):\n        text = text[:-1] + \"+00:00\"\n    dt = datetime.fromisoformat(text)\n    if dt.tzinfo is None:\n        dt = dt.replace(tzinfo=timezone.utc)\n    return dt\n\n\ndef percentile(sorted_values, pct):\n    \"\"\"Nearest-rank percentile on an already sorted list.\"\"\"\n    if not sorted_values:\n        return None\n    if len(sorted_values) == 1:\n        return sorted_values[0]\n    rank = (pct / 100.0) * (len(sorted_values) - 1)\n    lower = int(rank)\n    upper = min(lower + 1, len(sorted_values) - 1)\n    frac = rank - lower\n    return sorted_values[lower] + (sorted_values[upper] - sorted_values[lower]) * frac\n\n\ndef main(argv=None):\n    parser = argparse.ArgumentParser(description=\"Tally JSON log records from stdin.\")\n    parser.add_argument(\"--since\", help=\"ISO-8601 timestamp; drop earlier records\")\n    args = parser.parse_args(argv)\n\n    since = parse_ts(args.since) if args.since else None\n\n    counts = defaultdict(lambda: defaultdict(int))\n    latencies = defaultdict(list)\n    malformed = 0\n    total = 0\n\n    for raw in sys.stdin:\n        line = raw.strip()\n        if not line:\n            continue\n        total += 1\n        try:\n            record = json.loads(line)\n            if not isinstance(record, dict):\n                raise ValueError(\"record must be a JSON object\")\n            ts = parse_ts(record[\"ts\"])\n            level = record[\"level\"]\n            if level not in LEVELS:\n                raise ValueError(\"unknown level\")\n            service = record[\"service\"]\n            if not isinstance(service, str):\n                raise ValueError(\"service must be a string\")\n            if since is not None and ts < since:\n                continue\n            counts[service][level] += 1\n            latency = record.get(\"latency_ms\")\n            if latency is not None:\n                if isinstance(latency, bool) or not isinstance(latency, (int, float)):\n                    raise ValueError(\"latency_ms must be a number\")\n                latencies[service].append(float(latency))\n        except (ValueError, KeyError, TypeError, json.JSONDecodeError):\n            malformed += 1\n\n    for service in sorted(counts):\n        parts = [f\"{service}:\"]\n        for level in LEVELS:\n            parts.append(f\"{level}={counts[service][level]}\")\n        parts.append(f\"total={sum(counts[service].values())}\")\n        line = \" \".join(parts)\n        values = sorted(latencies.get(service, []))\n        if values:\n            line += f\" p50={percentile(values, 50):.2f} p95={percentile(values, 95):.2f}\"\n        else:\n            line += \" p50=n/a p95=n/a\"\n        print(line)\n\n    print(f\"# malformed={malformed} total={total}\", file=sys.stderr)\n    return 0\n\n\nif __name__ == \"__main__\":\n    sys.exit(main())\n```\n\n**Percentile method.** I sort each service's latency values and use linear interpolation between the two nearest ranks, which is the same convention as NumPy's default `linear` method. This avoids the off-by-one ambiguity of nearest-rank definitions and gives smooth results for small samples, at the cost of returning a value that may not be an actual observed latency.\n\n**Edge cases to test.**\n1. A service with only one latency value, where p50 and p95 must both equal that value.\n2. Records with `latency_ms` missing, `null`, or a non-numeric type, which must be excluded without incrementing the malformed counter.\n3. `--since` with a timezone-aware cutoff compared against naive or `Z`-suffixed timestamps, plus a malformed line mixed into an otherwise valid stream.";
+  const TOKENS = 928, CPT = TEXT.length / TOKENS;  // characters per token in this reply
+  const lanes = [...document.querySelectorAll('#race .lane')].map(el => ({
+    el, rate: +el.dataset.rate, ttft: +el.dataset.ttft / 1000,
+    out: el.querySelector('.lane-out span'), bar: el.querySelector('.lane-bar i'),
+    tok: el.querySelector('.tok'), t: el.querySelector('.t'),
+  }));
+  const fmt = n => n.toLocaleString('en-US');
+  function paint(lane, elapsed) {
+    const decoding = Math.max(0, elapsed - lane.ttft);
+    const n = elapsed < lane.ttft ? 0 : Math.min(TOKENS, 1 + Math.floor(decoding * lane.rate));
+    const total = lane.ttft + (TOKENS - 1) / lane.rate;
+    lane.out.textContent = TEXT.slice(0, Math.round(n * CPT)).slice(-1400);
+    lane.bar.style.width = (n / TOKENS * 100).toFixed(2) + '%';
+    lane.tok.textContent = fmt(n) + ' / ' + fmt(TOKENS);
+    const done = n >= TOKENS;
+    lane.t.textContent = done ? 'done in ' + total.toFixed(1) + ' s' : Math.min(elapsed, total).toFixed(1) + ' s';
+    lane.t.classList.toggle('done', done);
+    return done;
+  }
+  let raf = 0;
+  function run() {
+    cancelAnimationFrame(raf);
+    const t0 = performance.now();
+    const tick = now => {
+      const elapsed = (now - t0) / 1000;
+      const allDone = lanes.map(l => paint(l, elapsed)).every(Boolean);
+      if (!allDone) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+  }
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still) lanes.forEach(l => paint(l, 1e9)); else run();
+  document.getElementById('replay').addEventListener('click', run);
+
+  // Ceiling chart: one scale for bars, ceiling, ticks and labels.
+  const data = [{"label": "No drafter", "sub": "code-v1", "ceil": 31.4, "v": 23.99}, {"label": "Essay and poem", "sub": "our prompt", "ceil": 31.4, "v": 75.93}, {"label": "Reasoning", "sub": "reasoning-v1", "ceil": 31.4, "v": 97.89}, {"label": "1,000-line script", "sub": "our prompt", "ceil": 31.4, "v": 130.81}, {"label": "Code", "sub": "code-v1 \u00b7 ./start.sh", "ceil": 31.4, "v": 135.21, "hot": true}];
+  const svg = document.getElementById('ceiling'), NS = 'http://www.w3.org/2000/svg';
+  const X0 = 170, X1 = 600, MAX = 160, ROW = 46, TOP = 14;
+  const x = val => X0 + (val / MAX) * (X1 - X0);
+  const el = (tag, attrs, text) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; svg.appendChild(e); return e; };
+  const axisY = TOP + data.length * ROW + 6;
+  for (let t = 0; t <= MAX; t += 40) {
+    el('line', { x1: x(t), x2: x(t), y1: TOP - 4, y2: axisY, style: 'stroke: var(--line)', 'stroke-width': 1 });
+    el('text', { x: x(t), y: axisY + 18, 'text-anchor': 'middle', 'font-size': 11, style: 'fill: var(--faint)' }, t);
+  }
+  el('text', { x: X1, y: axisY + 36, 'text-anchor': 'end', 'font-size': 11, style: 'fill: var(--faint)' }, 'tok/s, batch 1');
+  data.forEach((d, i) => {
+    const y = TOP + i * ROW;
+    el('text', { x: 0, y: y + 15, 'font-size': 12, style: 'fill: var(--fg)' }, d.label);
+    el('text', { x: 0, y: y + 31, 'font-size': 10.5, style: 'fill: var(--faint)' }, d.sub);
+    el('rect', { x: X0, y: y + 6, width: x(d.v) - X0, height: 22, rx: 2, style: d.hot ? 'fill: var(--accent)' : 'fill: var(--accent); opacity: 0.55' });
+    el('line', { x1: x(d.ceil), x2: x(d.ceil), y1: y + 1, y2: y + 33, style: 'stroke: var(--amber)', 'stroke-width': 2, 'stroke-dasharray': '4 3' });
+    const past = d.v > d.ceil;
+    el('text', { x: Math.max(x(d.v), x(d.ceil)) + 10, y: y + 22, 'font-size': 12.5, style: 'fill: var(--fg); font-weight: 500' }, d.v.toFixed(1) + (past ? '  · ' + (d.v / d.ceil).toFixed(1) + 'x the ceiling' : '  · ' + Math.round(d.v / d.ceil * 100) + '% of ' + Math.round(d.ceil)));
+  });
+
+  // Copy buttons: clipboard inside the click, select the text if that is refused.
+  document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', () => {
+    const code = btn.parentElement.querySelector('code');
+    const text = code.innerText;
+    const ok = () => { btn.textContent = 'Copied'; setTimeout(() => (btn.textContent = 'Copy'), 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(code); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Press ⌘C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+  }));
+})();
+</script>
+</body>
+</html>
