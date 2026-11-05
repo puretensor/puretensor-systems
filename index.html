@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PureTensor Systems · Measured recipes for local models</title>
-<meta name="description" content="One-command recipes for running new open models on RTX PRO 6000 cards. Every number is a Verified LocalMaxxing run.">
+<title>PureTensor Systems · Open models, measured on our own cards</title>
+<meta name="description" content="PureTensor Systems: one-command LocalMaxxing recipes for new open models on RTX PRO 6000 cards, and our own benchmark board of every model we have scored.">
 <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
 <link rel="icon" href="/favicon-32.png?v=2" sizes="32x32" type="image/png">
 <link rel="icon" href="/favicon-192.png?v=2" sizes="192x192" type="image/png">
@@ -19,13 +19,13 @@
 
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="./">
+    <a class="brand" href="./" aria-current="page">
       <span class="wordmark"><span>Pure</span><b>Tens</b><svg viewBox="0 0 22 22" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="9.25" stroke-width="2"/><line x1="4.9" y1="4.9" x2="17.1" y2="17.1" stroke-width="2"/><line x1="17.1" y1="4.9" x2="4.9" y2="17.1" stroke-width="2"/></svg><b>r</b></span>
       <span class="brand-tag">SYSTEMS</span>
     </a>
     <nav class="site-nav" aria-label="Site">
-      <a href="./" aria-current="page">Recipes</a>
-      <a href="#rules">Rules</a>
+      <a href="localmaxxing/">LocalMaxxing</a>
+      <a href="bench/">Benchmarks</a>
       <a href="https://github.com/puretensor">GitHub</a>
     </nav>
   </div>
@@ -34,48 +34,27 @@
 <main>
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Recipes · RTX PRO 6000 · Verified on LocalMaxxing</p>
-    <h1>New open models, <span class="hot">measured</span> <span class="dim">on our own cards, started with one command.</span></h1>
-    <p class="lede">Each recipe pins the image, the weights and every flag, explains why the model runs as fast as it does, and links every number to a <strong>Verified run on LocalMaxxing</strong> that anyone can check.</p>
+    <p class="eyebrow">PureTensor Systems · RTX PRO 6000</p>
+    <h1>Open models, <span class="hot">measured</span> <span class="dim">on our own cards.</span></h1>
+    <p class="lede">Two ways in. <strong>LocalMaxxing</strong> is how fast a model runs, with a recipe you can start in one command. <strong>Benchmarks</strong> is how well it does the work, scored by code on our own suites.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Recipes</p>
-      <h2>Ready to run.</h2>
-    </div>
-    <div class="recipes">
-      <a class="recipe" href="models/Ripple-65B-Preview-1x-RTX-PRO-6000/">
-        <span class="meta">002 · 1× or 2× RTX PRO 6000 · 600 W · SGLang</span>
-        <h3>Ripple-65B Preview</h3>
-        <span class="nums"><span><b>135.2</b>tok/s code</span><span><b>97.9</b>tok/s reasoning</span><span><b>212.4</b>on two cards</span></span>
-        <span class="small">Ricursive's NVFP4 weights and DFlash2 drafter on a dense 65B, 5.6x a plain decode; tensor parallel 2 adds x1.59. 6 Verified runs.</span>
-        <span class="go">Open the recipe →</span>
+    <div class="recipes" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr))">
+      <a class="recipe" href="localmaxxing/">
+        <span class="meta">Speed · recipes · Verified on LocalMaxxing</span>
+        <h3>LocalMaxxing</h3>
+        <span class="small">One-command recipes for new open models on RTX PRO 6000 cards. Each pins the image, the weights and every flag, explains why it runs as fast as it does, and links every number to a Verified LocalMaxxing run.</span>
+        <span class="go">Open the recipes →</span>
       </a>
-      <a class="recipe" href="models/Nanbeige4.3-33B-1x-RTX-PRO-6000-MaxQ/">
-        <span class="meta">001 · 1× RTX PRO 6000 Max-Q · 325 W · vLLM</span>
-        <h3>Nanbeige4.3-33B</h3>
-        <span class="nums"><span><b>94.1</b>tok/s code</span><span><b>92.6</b>tok/s reasoning</span><span><b>105.3</b>with DFlash2</span></span>
-        <span class="small">NVFP4 weights and free n-gram drafts, 2.2x stock FP8. 16 Verified runs.</span>
-        <span class="go">Open the recipe →</span>
+      <a class="recipe" href="bench/">
+        <span class="meta">Quality · PT-FMB · PT-AWB · seat bake-offs</span>
+        <h3>Benchmarks</h3>
+        <span class="small">Every model we have scored on our own code-graded suites, side by side with its speed on our cards. Ranked by seat profile, never by one number, with partial and unvalidated runs flagged.</span>
+        <span class="go">Open the benchmarks →</span>
       </a>
-    </div>
-  </div>
-</section>
-
-<section id="rules">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">House rules</p>
-      <h2>What every recipe here promises.</h2>
-    </div>
-    <div class="cols">
-      <div><h3>Every number links to a run</h3><p>Each speed on a recipe page is a Verified LocalMaxxing run: the canonical prompt, the model's output, the engine's timings and the launch command, public.</p></div>
-      <div><h3>Pinned, so it reproduces</h3><p>Docker images by digest or Python wheels by version, and weights by commit. <code>--print</code> shows the exact command before anything starts.</p></div>
-      <div><h3>Gains are confirmed, not hoped for</h3><p>A tuned setting stays only if interleaved fresh boots against stock show a gain, reported with a 95% confidence interval.</p></div>
-      <div><h3>The why comes with the what</h3><p>Weight bytes per token, bandwidth ceilings, tokens per step: each page explains its numbers, including what did not work.</p></div>
     </div>
   </div>
 </section>
