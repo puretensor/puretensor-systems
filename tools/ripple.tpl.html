@@ -47,6 +47,7 @@
       <span class="chip">NVFP4 weights</span>
       <span class="chip">DFlash2 drafter</span>
       <span class="chip">SGLang 0.5.19</span>
+      <span class="chip">1 or 2 cards</span>
       <span class="chip">Pinned wheels</span>
       <span class="chip">MIT recipe</span>
     </div>
@@ -148,6 +149,22 @@
       <span class="big num hot">134</span><span class="u">tok/s · code-v1, measured {{CODE}}</span>
     </div>
     <p class="small" style="margin-top: 12px; max-width: 70ch">In our coding agent, with about 18K tokens of system prompt and tools before every request, we saw a steady 50-70 tok/s on prose and 110-120 on long code after warmup. That is below the bare-API numbers above: the long context makes each step slower, and the agent samples with its own settings rather than at temperature 0.</p>
+  </div>
+</section>
+
+<section id="two-cards">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Two cards</p>
+      <h2><span class="hot">{{TP2_CODE}} tok/s</span> with <code>./start.sh tp2</code>.</h2>
+      <p>Tensor parallel 2 over PCIe Gen5 (no NVLink, peer-to-peer on): each card reads half the weights, so the bandwidth-bound step halves, and about 160 small all-reduces per step cost a few milliseconds back. Confirmed by our harness over {{TP2_PAIRS}} paired fresh boots against one card: <strong>x{{TP2_RATIO}}</strong> [95% CI {{TP2_CI}}], all of it step time (tokens per step unchanged).</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="k">Code, two cards</span><span class="v hot">{{TP2_CODE}}<small>tok/s</small></span><span class="s">TP2 · <a href="{{RUN}}{{TP2_CODE_ID}}">run</a></span></div>
+      <div class="stat"><span class="k">Reasoning, two cards</span><span class="v">{{TP2_REASON}}<small>tok/s</small></span><span class="s">TP2 · <a href="{{RUN}}{{TP2_REASON_ID}}">run</a></span></div>
+      <div class="stat"><span class="k">Verify step</span><span class="v">32.4<small>ms</small></span><span class="s">51.2 ms on one card</span></div>
+      <div class="stat"><span class="k">All-reduce</span><span class="v">2<small>ms saved</small></span><span class="s">SGLang custom vs NCCL alone</span></div>
+    </div>
   </div>
 </section>
 

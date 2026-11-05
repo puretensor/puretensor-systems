@@ -43,10 +43,11 @@
     <h1><span class="hot">135 tokens a second</span> from a dense 65B, <span class="dim">on one card.</span></h1>
     <p class="lede">Ripple-65B Preview reads all of its weights for every pass, so on its own one card writes 24 tokens a second. <strong>Ricursive's DFlash2 drafter turns each pass into several tokens: 135.2 tok/s on code and 97.9 on reasoning</strong>, one request at a time, with Ricursive's own NVFP4 weights and flags. One command starts the same server.</p>
     <div class="chips">
-      <span class="chip ok">4 Verified runs</span>
+      <span class="chip ok">6 Verified runs</span>
       <span class="chip">NVFP4 weights</span>
       <span class="chip">DFlash2 drafter</span>
       <span class="chip">SGLang 0.5.19</span>
+      <span class="chip">1 or 2 cards</span>
       <span class="chip">Pinned wheels</span>
       <span class="chip">MIT recipe</span>
     </div>
@@ -151,6 +152,22 @@
   </div>
 </section>
 
+<section id="two-cards">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Two cards</p>
+      <h2><span class="hot">212.4 tok/s</span> with <code>./start.sh tp2</code>.</h2>
+      <p>Tensor parallel 2 over PCIe Gen5 (no NVLink, peer-to-peer on): each card reads half the weights, so the bandwidth-bound step halves, and about 160 small all-reduces per step cost a few milliseconds back. Confirmed by our harness over 3 paired fresh boots against one card: <strong>x1.589</strong> [95% CI 1.512-1.641], all of it step time (tokens per step unchanged).</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="k">Code, two cards</span><span class="v hot">212.4<small>tok/s</small></span><span class="s">TP2 · <a href="https://www.localmaxxing.com/runs/cmw346qh50bi6oa01ppqdfwov">run</a></span></div>
+      <div class="stat"><span class="k">Reasoning, two cards</span><span class="v">151.9<small>tok/s</small></span><span class="s">TP2 · <a href="https://www.localmaxxing.com/runs/cmw346r1m0bi9oa01bafzu0wk">run</a></span></div>
+      <div class="stat"><span class="k">Verify step</span><span class="v">32.4<small>ms</small></span><span class="s">51.2 ms on one card</span></div>
+      <div class="stat"><span class="k">All-reduce</span><span class="v">2<small>ms saved</small></span><span class="s">SGLang custom vs NCCL alone</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="profiles">
   <div class="wrap">
     <div class="sec-head">
@@ -221,7 +238,7 @@ cd Ripple-65B-Preview-1x-RTX-PRO-6000
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Receipts</p>
-      <h2>Eight runs, all linked.</h2>
+      <h2>Ten runs, all linked.</h2>
       <p>Each LocalMaxxing run page holds the prompt, the model's output, the engine's own timings and the exact launch command. Runs on LocalMaxxing's canonical prompts are Verified; the others are marked unverified only because their prompts are not canonical.</p>
     </div>
     <div class="ledger-scroll"><div class="ledger">
@@ -250,6 +267,12 @@ cd Ripple-65B-Preview-1x-RTX-PRO-6000
 <div class="ledger-row"><span class="what">NVFP4, no drafter<small>reasoning-v1</small></span>
 <a href="https://www.localmaxxing.com/runs/cmw2s15m70bc4oa01fzbv9hen">cmw2s15m70bc4oa01fzbv9hen</a><span class="r">23.96</span><span class="r">240 ms</span>
 <span>prompt 9000edaa · out 757d62e6 · <span class="ok">Verified</span></span></div>
+<div class="ledger-row"><span class="what">Two cards, TP2<small>code-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw346qh50bi6oa01ppqdfwov">cmw346qh50bi6oa01ppqdfwov</a><span class="r">212.37</span><span class="r">100 ms</span>
+<span>prompt a737db73 · out d5aa5da3 · <span class="ok">Verified</span></span></div>
+<div class="ledger-row"><span class="what">Two cards, TP2<small>reasoning-v1</small></span>
+<a href="https://www.localmaxxing.com/runs/cmw346r1m0bi9oa01bafzu0wk">cmw346r1m0bi9oa01bafzu0wk</a><span class="r">151.95</span><span class="r">132 ms</span>
+<span>prompt 9000edaa · out 9399c0e8 · <span class="ok">Verified</span></span></div>
     </div></div>
     <div class="cols cols-3" id="method" style="margin-top: 40px">
       <div>
@@ -262,7 +285,7 @@ cd Ripple-65B-Preview-1x-RTX-PRO-6000
       </div>
       <div>
         <h3>Reproduced from a fresh clone</h3>
-        <p>On 5 November we cloned the recipe on the same card, with the CPU in its normal state and the default 64K context. <code>start.sh</code> built the environment from the lock file, reused the pinned weights already on disk and was serving in 354 s. <code>bench.py</code> then measured <strong>131.9 tok/s on code and 101.6 on reasoning</strong>, at 51.1 and 51.6 ms per step: the Verified runs' step time, with tokens per step moving as the output does.</p>
+        <p>On 5 November we cloned the recipe on the same card, with the CPU in its normal state and the default 64K context. <code>start.sh</code> built the environment from the lock file, reused the pinned weights already on disk and was serving in 354 s. <code>bench.py</code> then measured <strong>131.9 tok/s on code and 101.6 on reasoning</strong>, at 51.1 and 51.6 ms per step: the Verified runs' step time, with tokens per step moving as the output does. The two-card profile from a fresh clone: <strong>206.8 and 158.2 tok/s</strong> at 32.7 ms per step.</p>
       </div>
     </div>
   </div>
