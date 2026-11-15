@@ -13,4 +13,4 @@ where every number links to a Verified LocalMaxxing run.
 
 Static files, served by GitHub Pages.
 
-Release: v0.3.1. Typography is served locally from `assets/fonts/`; font licenses are included alongside the files.
+Release: v0.3.2. Typography is served locally from `assets/fonts/`; font licenses are included alongside the files.
