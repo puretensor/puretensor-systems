@@ -6,10 +6,11 @@ where every number links to a Verified LocalMaxxing run.
 - `index.html`: the hub, with two ways in.
 - `localmaxxing/index.html`: the recipe list (one-command recipes, every number a Verified LocalMaxxing run).
 - `models/<recipe>/index.html`: one page per recipe, built by `tools/build_<recipe>.py` from the run records.
-- `bench/index.html`: the benchmark board. Built in tensor-scripts, never edited here:
-  `python3 -I ~/tensor-scripts/bench/board/build_board.py --site systems --out bench/index.html`.
+- `bench/index.html`: the benchmark board, generated from the public benchmark records.
   The public build carries scores and builds only: no hostnames, internal service names, verdict prose or source
   paths, and only speed runs that are public on LocalMaxxing.
 - `assets/site.css`: the shared styles.
 
 Static files, served by GitHub Pages.
+
+Release: v0.3.1. Typography is served locally from `assets/fonts/`; font licenses are included alongside the files.
